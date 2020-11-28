@@ -5,7 +5,8 @@
 
 class Player {
    public:
-    Player();
+    Player(std::string name_);
+    Player(){};
 
    private:
     std::string name;

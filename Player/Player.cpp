@@ -1,5 +1,3 @@
 #include "./Player.hpp"
 
-Player::Player(){
-    // create player
-}
+Player::Player(std::string name_) { name = name_; }

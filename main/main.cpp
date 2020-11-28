@@ -1,11 +1,13 @@
 #include <iostream>
 
 #include "../Mafia/Mafia.hpp"
+#include "../Player/Player.hpp"
+#include "../GameManager/GameManager.hpp"
 
 using namespace std;
 
 int main(){
-    Mafia game;
-    cout<<"Hello!"<<endl;
+    GameManager game;
+    game.handle_inputs();
     return 0;
 }
