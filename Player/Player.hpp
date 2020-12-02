@@ -2,6 +2,8 @@
 #define __PLAYER__
 
 #include <string>
+#include "../main/defines.hpp"
+
 
 class Player {
    public:

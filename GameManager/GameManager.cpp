@@ -5,9 +5,13 @@ GameManager::GameManager() { mafia = new Mafia(); }
 void GameManager::handle_inputs() {
     string command;
     while (cin >> command) {
-        if (!command.compare("create_game")) {
-            create_game_command();
-        }
+        handle_command(command);
+    }
+}
+
+void GameManager::handle_command(string command) {
+    if (!command.compare(CREATE_GAME_COMMAND)) {
+        create_game_command();
     }
 }
 

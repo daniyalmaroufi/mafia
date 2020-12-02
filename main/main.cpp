@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "./defines.hpp"
 #include "../Mafia/Mafia.hpp"
 #include "../Player/Player.hpp"
 #include "../GameManager/GameManager.hpp"
