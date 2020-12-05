@@ -49,7 +49,6 @@ void GameManager::assign_role_command() {
         string name, role;
         cin >> name >> role;
         int user = find_user(name);
-        cout << name << ": " << role << endl;
         set_user_role(user, role);
     } catch (NoUser& ex) {
         cout << ex.what() << endl;
@@ -106,6 +105,7 @@ void GameManager::start_game_command() {
         check_players_role();
         create_players();
         show_players_role();
+        cout << "Ready? Set! Go." << endl;
     } catch (NoGame& ex) {
         cout << ex.what() << endl;
     } catch (NoRole& ex) {
@@ -121,6 +121,5 @@ void GameManager::check_players_role() {
 }
 
 void GameManager::show_players_role() {
-    for(auto player: players)
-    player->show_info();
+    for (auto player : players) player->show_info();
 }
