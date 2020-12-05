@@ -46,11 +46,12 @@ class GameManager {
     void create_game_command();
     void assign_role_command();
     int find_user(string name);
+    void remove_users();
     void set_user_role(int user, string role_);
     void start_game_command();
     void check_players_role();
-
-    // Player* create_player(string name, string role);
+    void create_players();
+    void show_players_role();
 
     vector<User> users;
     vector<Player*> players;

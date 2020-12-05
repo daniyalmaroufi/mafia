@@ -9,7 +9,9 @@
 
 class Mafia : public Player {
    public:
-    Mafia();
+    Mafia(std::string name_);
+    Mafia(){};
+    void show_info();
 
    private:
 };

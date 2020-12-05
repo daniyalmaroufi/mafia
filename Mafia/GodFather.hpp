@@ -9,7 +9,9 @@
 
 class GodFather : public Mafia {
    public:
-    GodFather();
+    GodFather(std::string name_);
+    GodFather(){};
+    void show_info();
 
    private:
 };

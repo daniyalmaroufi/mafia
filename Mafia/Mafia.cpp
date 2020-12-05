@@ -1,3 +1,3 @@
 #include "./Mafia.hpp"
 
-Mafia::Mafia() { std::cout << ":|" << std::endl; }
+Mafia::Mafia(std::string name_) : Player(name_) { }

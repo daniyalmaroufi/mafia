@@ -1,3 +1,3 @@
 #include "./Silencer.hpp"
 
-Silencer::Silencer() { std::cout << ":))" << std::endl; }
+Silencer::Silencer(std::string name_) : Mafia(name_) {}

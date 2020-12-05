@@ -22,8 +22,7 @@ void GameManager::create_game_command() {
     getline(cin, rest_of_command);
     stringstream ststream(rest_of_command);
     string player_name;
-    while (!users.empty()) users.pop_back();
-
+    remove_users();
     while (ststream >> player_name) {
         User user;
         user.name = player_name;
@@ -31,6 +30,10 @@ void GameManager::create_game_command() {
         users.push_back(user);
     }
     game_created = true;
+}
+
+void GameManager::remove_users() {
+    while (!users.empty()) users.pop_back();
 }
 
 int GameManager::find_user(string name) {
@@ -66,21 +69,43 @@ void GameManager::set_user_role(int user, string role_) {
     if (role_ == "silencer") users[user].role = silencer;
 }
 
-// Player* GameManager::create_player(User) {
-//     switch (role_)
-//     {
-//     case "joker":
-//         return new Joker(name);
-//         break;
-//     }
-// }
+void GameManager::create_players() {
+    for (auto user : users) {
+        if (user.role == joker) {
+            players.push_back(new Joker(user.name));
+        }
+        if (user.role == villager) {
+            players.push_back(new Villager(user.name));
+        }
+        if (user.role == detective) {
+            players.push_back(new Detective(user.name));
+        }
+        if (user.role == doctor) {
+            players.push_back(new Doctor(user.name));
+        }
+        if (user.role == bulletproof) {
+            players.push_back(new BulletProof(user.name));
+        }
+        if (user.role == mafia) {
+            players.push_back(new Mafia(user.name));
+        }
+        if (user.role == godfather) {
+            players.push_back(new GodFather(user.name));
+        }
+        if (user.role == silencer) {
+            players.push_back(new Silencer(user.name));
+        }
+    }
+    remove_users();
+}
 
 void GameManager::start_game_command() {
     try {
         if (!game_created) throw NoGame();
         if (game_started) throw GameStarted();
         check_players_role();
-        // create players
+        create_players();
+        show_players_role();
     } catch (NoGame& ex) {
         cout << ex.what() << endl;
     } catch (NoRole& ex) {
@@ -93,4 +118,9 @@ void GameManager::start_game_command() {
 void GameManager::check_players_role() {
     for (int i = 0; i < users.size(); i++)
         if (users[i].role == no_role) throw NoRole();
+}
+
+void GameManager::show_players_role() {
+    for(auto player: players)
+    player->show_info();
 }

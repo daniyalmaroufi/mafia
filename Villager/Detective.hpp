@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 #include "../main/defines.hpp"
-#include "../Player/Player.hpp"
+#include "./Villager.hpp"
 
-class Detective : public Player {
+class Detective : public Villager {
    public:
-    Detective();
+    Detective(std::string name_);
+    Detective(){};
+    void show_info();
 
    private:
 };

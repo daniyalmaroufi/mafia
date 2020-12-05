@@ -9,7 +9,9 @@
 
 class Villager : public Player {
    public:
-    Villager();
+    Villager(std::string name_);
+    Villager(){};
+    void show_info();
 
    private:
 };

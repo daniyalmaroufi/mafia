@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 #include "../main/defines.hpp"
-#include "../Player/Player.hpp"
+#include "./Villager.hpp"
 
-class BulletProof : public Player {
+class BulletProof : public Villager {
    public:
-    BulletProof();
+    BulletProof(std::string name_);
+    BulletProof(){};
+    void show_info();
 
    private:
 };

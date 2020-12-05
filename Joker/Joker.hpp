@@ -12,6 +12,7 @@ class Joker : public Player {
    public:
     Joker(std::string name_);
     Joker(){};
+    void show_info();
 
    private:
 };

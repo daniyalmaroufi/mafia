@@ -1,3 +1,3 @@
 #include "./GodFather.hpp"
 
-GodFather::GodFather() { std::cout << ";|" << std::endl; }
+GodFather::GodFather(std::string name_) : Mafia(name_) {}

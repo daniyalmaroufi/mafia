@@ -1,3 +1,3 @@
 #include "./Doctor.hpp"
 
-Doctor::Doctor() { std::cout << "::|" << std::endl; }
+Doctor::Doctor(std::string name_) : Villager(name_) {}

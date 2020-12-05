@@ -1,3 +1,3 @@
 #include "./Detective.hpp"
 
-Detective::Detective() { std::cout << "::|" << std::endl; }
+Detective::Detective(std::string name_) : Villager(name_) {}

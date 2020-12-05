@@ -9,8 +9,10 @@
 
 class Silencer : public Mafia {
    public:
-    Silencer();
-
+    Silencer(std::string name_);
+    Silencer(){};
+    void show_info();
+    
    private:
 };
 

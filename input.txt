@@ -1,6 +1,6 @@
 create_game a b c
 assign_role a mafia
 assign_role a detective
-assign_role x villager
+assign_role c villager
 assign_role b villager
 start_game
