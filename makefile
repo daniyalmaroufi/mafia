@@ -18,7 +18,7 @@ mafia.out: obj/main.o obj/game_manager.o obj/mafia.o obj/player.o obj/joker.o ob
 obj/main.o: main/main.cpp
 	$(CPP) -c main/main.cpp -o obj/main.o
 
-obj/game_manager.o: $(GAME_MANAGER_DIR)GameManager.cpp $(GAME_MANAGER_DIR)GameManager.hpp
+obj/game_manager.o: $(GAME_MANAGER_DIR)GameManager.cpp $(GAME_MANAGER_DIR)GameManager.hpp $(GAME_MANAGER_DIR)Exceptions.hpp
 	$(CPP) -c $(GAME_MANAGER_DIR)GameManager.cpp -o obj/game_manager.o
 
 obj/mafia.o: $(MAFIA_DIR)Mafia.cpp $(MAFIA_DIR)Mafia.hpp

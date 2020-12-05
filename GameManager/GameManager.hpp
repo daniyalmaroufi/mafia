@@ -15,10 +15,21 @@
 #include "../Villager/Doctor.hpp"
 #include "../Villager/Villager.hpp"
 #include "../main/defines.hpp"
+#include "./Exceptions.hpp"
 
 using namespace std;
 
-enum roles { joker, villager, mafia, silencer, godfather, doctor, detective, bulletproof, no_role };
+enum roles {
+    joker,
+    villager,
+    mafia,
+    silencer,
+    godfather,
+    doctor,
+    detective,
+    bulletproof,
+    no_role
+};
 
 struct User {
     string name;
@@ -36,6 +47,8 @@ class GameManager {
     void assign_role_command();
     int find_user(string name);
     void set_user_role(int user, string role_);
+    void start_game_command();
+    void check_players_role();
 
     // Player* create_player(string name, string role);
 

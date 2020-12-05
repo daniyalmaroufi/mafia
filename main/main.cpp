@@ -10,5 +10,6 @@ using namespace std;
 int main(){
     GameManager game;
     game.handle_inputs();
+    cout<<endl;
     return 0;
 }

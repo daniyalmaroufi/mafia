@@ -10,11 +10,11 @@ void GameManager::handle_inputs() {
 }
 
 void GameManager::handle_command(string command) {
-    if (!command.compare(CREATE_GAME_COMMAND) && !game_started)
-        create_game_command();
+    if (!command.compare(CREATE_GAME_COMMAND)) create_game_command();
 
-    if (!command.compare(ASSIGN_ROLE_COMMAND) && !game_started)
-        assign_role_command();
+    if (!command.compare(ASSIGN_ROLE_COMMAND)) assign_role_command();
+
+    if (!command.compare(START_GAME_COMMAND)) start_game_command();
 }
 
 void GameManager::create_game_command() {
@@ -22,39 +22,37 @@ void GameManager::create_game_command() {
     getline(cin, rest_of_command);
     stringstream ststream(rest_of_command);
     string player_name;
-    while (!players.empty()) {
-        delete players.back();
-        players.pop_back();
-    }
+    while (!users.empty()) users.pop_back();
+
     while (ststream >> player_name) {
         User user;
         user.name = player_name;
         user.role = no_role;
         users.push_back(user);
     }
+    game_created = true;
 }
 
 int GameManager::find_user(string name) {
     for (int i = 0; i < users.size(); i++)
         if (users[i].name == name) return i;
 
-    return -1;
+    throw NoUser();
 }
 
 void GameManager::assign_role_command() {
-    if (!game_created) {
-        // dfd
+    try {
+        if (!game_created) throw NoGame();
+        string name, role;
+        cin >> name >> role;
+        int user = find_user(name);
+        cout << name << ": " << role << endl;
+        set_user_role(user, role);
+    } catch (NoUser& ex) {
+        cout << ex.what() << endl;
+    } catch (NoGame& ex) {
+        cout << ex.what() << endl;
     }
-    string name, role;
-    cin >> name >> role;
-    int user = find_user(name);
-    if (user == -1) {
-        // throw exception
-    }
-    set_user_role(user, role);
-    // remove previous player
-    // create new object
-    // replace pointer
 }
 
 void GameManager::set_user_role(int user, string role_) {
@@ -76,3 +74,23 @@ void GameManager::set_user_role(int user, string role_) {
 //         break;
 //     }
 // }
+
+void GameManager::start_game_command() {
+    try {
+        if (!game_created) throw NoGame();
+        if (game_started) throw GameStarted();
+        check_players_role();
+        // create players
+    } catch (NoGame& ex) {
+        cout << ex.what() << endl;
+    } catch (NoRole& ex) {
+        cout << ex.what() << endl;
+    } catch (GameStarted& ex) {
+        cout << ex.what() << endl;
+    }
+}
+
+void GameManager::check_players_role() {
+    for (int i = 0; i < users.size(); i++)
+        if (users[i].role == no_role) throw NoRole();
+}
