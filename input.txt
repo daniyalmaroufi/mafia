@@ -4,3 +4,7 @@ assign_role a detective
 assign_role c villager
 assign_role b villager
 start_game
+a b
+c b
+d c
+x d

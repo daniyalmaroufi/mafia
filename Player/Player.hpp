@@ -11,6 +11,7 @@ class Player {
     Player(std::string name_);
     Player(){};
     virtual void show_info() = 0;
+    bool is_name(std::string name_);
 
    protected:
     std::string name;

@@ -1,20 +1,38 @@
 #include "./GameManager.hpp"
 
-GameManager::GameManager() { game_started = false; }
+GameManager::GameManager() {
+    game_started = false;
+    day_counter = 0;
+}
 
 void GameManager::handle_inputs() {
     string command;
     while (cin >> command) {
         handle_command(command);
+        // cout<<"one looooooooooooop"<<endl;
     }
 }
 
 void GameManager::handle_command(string command) {
-    if (!command.compare(CREATE_GAME_COMMAND)) create_game_command();
+    if (!command.compare(CREATE_GAME_COMMAND)) {
+        create_game_command();
+        return;
+    }
 
-    if (!command.compare(ASSIGN_ROLE_COMMAND)) assign_role_command();
+    if (!command.compare(ASSIGN_ROLE_COMMAND)) {
+        assign_role_command();
+        return;
+    }
 
-    if (!command.compare(START_GAME_COMMAND)) start_game_command();
+    if (!command.compare(START_GAME_COMMAND)) {
+        start_game_command();
+        return;
+    }
+
+    if (phase == day && game_started) {
+        vote_in_day(command);
+        return;
+    }
 }
 
 void GameManager::create_game_command() {
@@ -51,9 +69,9 @@ void GameManager::assign_role_command() {
         int user = find_user(name);
         set_user_role(user, role);
     } catch (NoUser& ex) {
-        cout << ex.what() << endl;
+        cout << ex.what();
     } catch (NoGame& ex) {
-        cout << ex.what() << endl;
+        cout << ex.what();
     }
 }
 
@@ -105,13 +123,16 @@ void GameManager::start_game_command() {
         check_players_role();
         create_players();
         show_players_role();
+        game_started = true;
         cout << "Ready? Set! Go." << endl;
+        start_day();
+
     } catch (NoGame& ex) {
-        cout << ex.what() << endl;
+        cout << ex.what();
     } catch (NoRole& ex) {
-        cout << ex.what() << endl;
+        cout << ex.what();
     } catch (GameStarted& ex) {
-        cout << ex.what() << endl;
+        cout << ex.what();
     }
 }
 
@@ -122,4 +143,28 @@ void GameManager::check_players_role() {
 
 void GameManager::show_players_role() {
     for (auto player : players) player->show_info();
+}
+
+void GameManager::start_day() {
+    phase = day;
+    day_counter += 1;
+    cout << "Day: " << day_counter << endl;
+}
+
+void GameManager::vote_in_day(string voter) {
+    try {
+        player_exists(voter);
+        string votee;
+        cin >> votee;
+        vote[voter] = votee;
+    } catch (NoUser& ex) {
+        cout << ex.what();
+    }
+}
+
+void GameManager::player_exists(string name) {
+    for (auto player : players)
+        if (player->is_name(name)) return;
+
+    throw NoUser();
 }

@@ -2,6 +2,7 @@
 #define __GAME_MANAGER__
 
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 
@@ -31,6 +32,8 @@ enum roles {
     no_role
 };
 
+enum game_phase { day, night };
+
 struct User {
     string name;
     roles role;
@@ -52,11 +55,18 @@ class GameManager {
     void check_players_role();
     void create_players();
     void show_players_role();
+    void start_day();
+    void vote_in_day(string voter);
+    void player_exists(string name);
+
 
     vector<User> users;
     vector<Player*> players;
     bool game_created;
     bool game_started;
+    int day_counter;
+    game_phase phase;
+    map<string, string> vote;
 };
 
 #endif
