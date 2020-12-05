@@ -1,3 +1,3 @@
 #include "./Joker.hpp"
 
-Joker::Joker() { std::cout << ";-)" << std::endl; }
+Joker::Joker(std::string name_) : Player(name_) {}

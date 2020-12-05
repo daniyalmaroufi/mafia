@@ -2,14 +2,16 @@
 #define __JOKER__
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include "../main/defines.hpp"
+#include <vector>
+
 #include "../Player/Player.hpp"
+#include "../main/defines.hpp"
 
 class Joker : public Player {
    public:
-    Joker();
+    Joker(std::string name_);
+    Joker(){};
 
    private:
 };

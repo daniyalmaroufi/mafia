@@ -34,14 +34,45 @@ void GameManager::create_game_command() {
     }
 }
 
-void GameManager::add_player(string player_name) {
-    players.push_back(new Player(player_name));
+int GameManager::find_user(string name) {
+    for (int i = 0; i < users.size(); i++)
+        if (users[i].name == name) return i;
+
+    return -1;
 }
 
 void GameManager::assign_role_command() {
-    // if user exists
-    // find user in players
+    if (!game_created) {
+        // dfd
+    }
+    string name, role;
+    cin >> name >> role;
+    int user = find_user(name);
+    if (user == -1) {
+        // throw exception
+    }
+    set_user_role(user, role);
     // remove previous player
     // create new object
     // replace pointer
 }
+
+void GameManager::set_user_role(int user, string role_) {
+    if (role_ == "joker") users[user].role = joker;
+    if (role_ == "villager") users[user].role = villager;
+    if (role_ == "detective") users[user].role = detective;
+    if (role_ == "doctor") users[user].role = doctor;
+    if (role_ == "bulletproof") users[user].role = bulletproof;
+    if (role_ == "mafia") users[user].role = mafia;
+    if (role_ == "godfather") users[user].role = godfather;
+    if (role_ == "silencer") users[user].role = silencer;
+}
+
+// Player* GameManager::create_player(User) {
+//     switch (role_)
+//     {
+//     case "joker":
+//         return new Joker(name);
+//         break;
+//     }
+// }
