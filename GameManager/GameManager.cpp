@@ -1,6 +1,6 @@
 #include "./GameManager.hpp"
 
-GameManager::GameManager() { cout << "hi" << endl; }
+GameManager::GameManager() { game_started = false; }
 
 void GameManager::handle_inputs() {
     string command;
@@ -10,12 +10,11 @@ void GameManager::handle_inputs() {
 }
 
 void GameManager::handle_command(string command) {
-    if (!command.compare(CREATE_GAME_COMMAND)) {
+    if (!command.compare(CREATE_GAME_COMMAND) && !game_started)
         create_game_command();
-    }
-    if (!command.compare(ASSIGN_ROLE_COMMAND)) {
+
+    if (!command.compare(ASSIGN_ROLE_COMMAND) && !game_started)
         assign_role_command();
-    }
 }
 
 void GameManager::create_game_command() {
@@ -27,7 +26,12 @@ void GameManager::create_game_command() {
         delete players.back();
         players.pop_back();
     }
-    while (ststream >> player_name) add_player(player_name);
+    while (ststream >> player_name) {
+        User user;
+        user.name = player_name;
+        user.role = no_role;
+        users.push_back(user);
+    }
 }
 
 void GameManager::add_player(string player_name) {
@@ -35,5 +39,9 @@ void GameManager::add_player(string player_name) {
 }
 
 void GameManager::assign_role_command() {
-    // do sth
+    // if user exists
+    // find user in players
+    // remove previous player
+    // create new object
+    // replace pointer
 }
