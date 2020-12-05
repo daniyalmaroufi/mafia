@@ -20,9 +20,13 @@ void GameManager::handle_command(string command) {
 
 void GameManager::create_game_command() {
     string rest_of_command;
-    getline(cin,rest_of_command);
+    getline(cin, rest_of_command);
     stringstream ststream(rest_of_command);
     string player_name;
+    while (!players.empty()) {
+        delete players.back();
+        players.pop_back();
+    }
     while (ststream >> player_name) add_player(player_name);
 }
 
@@ -30,6 +34,6 @@ void GameManager::add_player(string player_name) {
     players.push_back(new Player(player_name));
 }
 
-void GameManager::assign_role_command(){
+void GameManager::assign_role_command() {
     // do sth
 }
