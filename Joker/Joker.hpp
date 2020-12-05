@@ -13,6 +13,7 @@ class Joker : public Player {
     Joker(std::string name_);
     Joker(){};
     void show_info();
+    void die_in_day();
 
    private:
 };

@@ -12,6 +12,7 @@ class Villager : public Player {
     Villager(std::string name_);
     Villager(){};
     void show_info();
+    void die_in_day();
 
    private:
 };

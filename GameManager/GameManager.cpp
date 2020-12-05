@@ -9,7 +9,6 @@ void GameManager::handle_inputs() {
     string command;
     while (cin >> command) {
         handle_command(command);
-        // cout<<"one looooooooooooop"<<endl;
     }
 }
 
@@ -30,7 +29,10 @@ void GameManager::handle_command(string command) {
     }
 
     if (phase == day && game_started) {
-        vote_in_day(command);
+        if (!command.compare(END_VOTE_COMMAND))
+            end_vote();
+        else
+            vote_in_day(command);
         return;
     }
 }
@@ -153,18 +155,49 @@ void GameManager::start_day() {
 
 void GameManager::vote_in_day(string voter) {
     try {
-        player_exists(voter);
         string votee;
         cin >> votee;
-        vote[voter] = votee;
+        find_player(voter);
+        find_player(votee);
+        votes[voter] = votee;
     } catch (NoUser& ex) {
         cout << ex.what();
     }
 }
 
-void GameManager::player_exists(string name) {
+Player* GameManager::find_player(string name) {
     for (auto player : players)
-        if (player->is_name(name)) return;
+        if (player->is_name(name)) return player;
 
     throw NoUser();
+}
+
+void GameManager::end_vote() {
+    string selected_player = find_selected();
+    find_player(selected_player)->die_in_day();
+    check_winner();
+}
+
+string GameManager::find_selected() {
+    map<string, int> votes_count;
+    for (auto vote : votes) {
+        votes_count[vote.second] += 1;
+    }
+
+    string selected = votes_count.begin()->first;
+    for (auto vote_count : votes_count)
+        if (votes_count[selected] < vote_count.second)
+            selected = vote_count.first;
+        else if (votes_count[selected] = vote_count.second)
+            if (vote_count.first < selected) selected = vote_count.first;
+
+    return selected;
+}
+
+void GameManager::check_winner() {
+    map<Player_status, int> players_status;
+    for (auto player : players) {
+        players_status[player->get_status()] += 1;
+        if (player->get_status() == joker_won) winner = the_joker;
+    }
 }

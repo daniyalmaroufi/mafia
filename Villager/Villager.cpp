@@ -6,3 +6,5 @@ void Villager::show_info() {
     std::cout << name << ": "
               << "villager" << std::endl;
 }
+
+void Villager::die_in_day() { status = villager_dead; }

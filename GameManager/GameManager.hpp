@@ -57,8 +57,10 @@ class GameManager {
     void show_players_role();
     void start_day();
     void vote_in_day(string voter);
-    void player_exists(string name);
-
+    Player* find_player(string name);
+    void end_vote();
+    string find_selected();
+    void check_winner();
 
     vector<User> users;
     vector<Player*> players;
@@ -66,7 +68,8 @@ class GameManager {
     bool game_started;
     int day_counter;
     game_phase phase;
-    map<string, string> vote;
+    map<string, string> votes;
+    Player_types winner;
 };
 
 #endif

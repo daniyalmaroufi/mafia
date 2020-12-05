@@ -12,6 +12,7 @@ class Mafia : public Player {
     Mafia(std::string name_);
     Mafia(){};
     void show_info();
+    void die_in_day();
 
    private:
 };

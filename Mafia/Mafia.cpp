@@ -6,3 +6,5 @@ void Mafia::show_info() {
     std::cout << name << ": "
               << "mafia" << std::endl;
 }
+
+void Mafia::die_in_day() { status = mafia_dead; }
