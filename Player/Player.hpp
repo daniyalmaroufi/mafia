@@ -19,6 +19,9 @@ class Player {
     virtual bool do_nighttask_on(Player* second_player) = 0;
     virtual bool is_mafia() = 0;
     void heal();
+    void silence();
+    virtual void assult();
+    virtual void die_in_night();
 
    protected:
     std::string name;

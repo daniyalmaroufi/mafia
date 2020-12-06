@@ -36,14 +36,18 @@ void GameManager::handle_command(string command) {
 
     if (phase == day && game_started) {
         if (!command.compare(END_VOTE_COMMAND))
-            end_vote();
+            end_night();
         else
             vote_in_day(command);
         return;
     }
 
     if (phase == night && game_started) {
-        vote_in_night(command);
+        if (!command.compare(END_NIGHT_COMMAND))
+            end_night();
+        else
+            vote_in_night(command);
+        return;
     }
 }
 
@@ -213,7 +217,7 @@ bool GameManager::check_winner() {
     map<Player_status, int> players_status;
     for (auto player : players) {
         players_status[player->get_status()] += 1;
-        if (player->get_status() == joker_won) {
+        if (player->get_status() == joker_dead) {
             winner = the_joker;
             return true;
         }
@@ -258,4 +262,13 @@ void GameManager::vote_in_night(string voter) {
     } catch (DeadPatient& ex) {
         cout << ex.what();
     }
+}
+
+void GameManager::end_night() {
+    string selected_player = find_selected();
+    find_player(selected_player)->die_in_night();
+    if (!check_winner()) {
+        start_night();
+    }
+    votes.clear();
 }

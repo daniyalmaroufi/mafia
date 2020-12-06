@@ -78,4 +78,11 @@ public:
     }
 };
 
+class DeadPerson : public std::exception {
+public:
+    const char* what() {
+        return "Person is dead\n";
+    }
+};
+
 #endif

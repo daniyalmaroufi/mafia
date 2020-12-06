@@ -8,7 +8,7 @@ void Joker::show_info() {
 }
 
 void Joker::die_in_day() {
-    status = joker_won;
+    status = joker_dead;
     std::cout << name << " died" << std::endl;
 }
 

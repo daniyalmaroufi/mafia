@@ -63,6 +63,7 @@ class GameManager {
     bool check_winner();
     void start_night();
     void vote_in_night(string voter);
+    void end_night();
 
     vector<User> users;
     vector<Player*> players;
