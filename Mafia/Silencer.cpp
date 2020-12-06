@@ -7,6 +7,8 @@ void Silencer::show_info() {
               << "silencer" << std::endl;
 }
 
+bool Silencer::need_to_wake_up() { return true; }
+
 bool Silencer::do_nighttask_on(Player* second_player) {
     if (!done_nighttask) {
         if (second_player->get_status() != alive) throw DeadPerson();

@@ -13,6 +13,7 @@ class GodFather : public Mafia {
     GodFather(){};
     void show_info();
     bool is_mafia();
+    bool need_to_wake_up();
 
    private:
 };

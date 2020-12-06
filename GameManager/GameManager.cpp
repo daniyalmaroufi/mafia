@@ -14,16 +14,16 @@ void GameManager::handle_inputs() {
     while (cin >> command) {
         handle_command(command);
         if (winner == the_joker) {
-            cout << "Joker won" << endl;
+            cout << "Joker won";
             return;
             // reset_game();
         }
         if (winner == the_villagers) {
-            cout << "Villagers won" << endl;
+            cout << "Villagers won";
             return;
         }
         if (winner == the_mafias) {
-            cout << "Mafia won" << endl;
+            cout << "Mafia won";
             return;
         }
     }
@@ -194,7 +194,7 @@ void GameManager::show_players_role() {
 void GameManager::start_day() {
     phase = day;
     day_counter += 1;
-    cout << "Day: " << day_counter << endl;
+    cout << "Day " << day_counter << endl;
 }
 
 void GameManager::vote_in_day(string voter) {
@@ -266,7 +266,7 @@ bool GameManager::check_winner() {
 void GameManager::start_night() {
     phase = night;
     night_counter += 1;
-    cout << "Night: " << night_counter << endl;
+    cout << "Night " << night_counter << endl;
     for (auto player : players) {
         player->unsilence();
         if (player->need_to_wake_up() && player->get_status() == alive)
