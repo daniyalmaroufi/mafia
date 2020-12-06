@@ -1,6 +1,7 @@
 #include "./GameManager.hpp"
 
 GameManager::GameManager() {
+    game_created=false;
     game_started = false;
     day_counter = 0;
     night_counter = 0;
@@ -45,14 +46,14 @@ void GameManager::handle_command(string command) {
         return;
     }
 
-    if (!command.compare(SWAP_COMMAND)) {
+    if (!command.compare(SWAP_COMMAND) && game_created) {
         swap_character();
         return;
     } else {
         can_swap = false;
     }
 
-    if (!command.compare(GAME_STATE_COMMAND)) {
+    if (!command.compare(GAME_STATE_COMMAND) && game_created) {
         game_state();
         return;
     }
