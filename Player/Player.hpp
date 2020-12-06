@@ -26,6 +26,7 @@ class Player {
     std::string get_name();
     virtual void assult();
     virtual void die_in_night() = 0;
+    void change_character_to(std::string name_, bool silent);
 
    protected:
     std::string name;

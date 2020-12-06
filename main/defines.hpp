@@ -6,6 +6,7 @@
 #define START_GAME_COMMAND "start_game"
 #define END_VOTE_COMMAND "end_vote"
 #define END_NIGHT_COMMAND "end_night"
+#define SWAP_COMMAND "swap_character"
 
 enum Player_status {
     alive,

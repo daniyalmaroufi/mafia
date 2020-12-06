@@ -85,4 +85,25 @@ public:
     }
 };
 
+class Swapped : public std::exception {
+public:
+    const char* what() {
+        return "Characters already swapped\n";
+    }
+};
+
+class NightSwap : public std::exception {
+public:
+    const char* what() {
+        return "Can't swap before end on night\n";
+    }
+};
+
+class DaySwap : public std::exception {
+public:
+    const char* what() {
+        return "Voting in progress\n";
+    }
+};
+
 #endif

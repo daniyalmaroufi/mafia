@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <map>
+#include <set>
 #include <sstream>
 #include <string>
-#include <set>
 
 #include "../Joker/Joker.hpp"
 #include "../Mafia/GodFather.hpp"
@@ -66,6 +66,8 @@ class GameManager {
     void vote_in_night(string voter);
     void end_night();
     void show_silents();
+    void swap_character(string first_name);
+    void do_swap(Player* first_player, Player* second_player);
 
     vector<User> users;
     vector<Player*> players;
@@ -76,6 +78,8 @@ class GameManager {
     game_phase phase;
     map<string, string> votes;
     Player_types winner;
+    bool can_swap;
+    bool swaped;
 };
 
 #endif

@@ -27,3 +27,11 @@ bool Player::is_silent() { return status == silent; }
 void Player::unsilence() { status = alive; }
 
 std::string Player::get_name() { return name; }
+
+void Player::change_character_to(std::string name_, bool silent) {
+    name = name_;
+    if (silent)
+        silence();
+    else
+        unsilence();
+}

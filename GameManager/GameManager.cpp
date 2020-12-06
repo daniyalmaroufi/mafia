@@ -4,6 +4,7 @@ GameManager::GameManager() {
     game_started = false;
     day_counter = 0;
     night_counter = 0;
+    can_swap = false;
 }
 
 void GameManager::handle_inputs() {
@@ -34,9 +35,14 @@ void GameManager::handle_command(string command) {
         return;
     }
 
+    if (!command.compare(SWAP_COMMAND))
+        swap_character(command);
+    else
+        can_swap = false;
+
     if (phase == day && game_started) {
         if (!command.compare(END_VOTE_COMMAND))
-            end_night();
+            end_vote();
         else
             vote_in_day(command);
         return;
@@ -249,9 +255,9 @@ void GameManager::vote_in_night(string voter) {
 
     } catch (CannotWakeup& ex) {
         cout << ex.what();
-    } catch (DeadUser& ex) {
-        cout << ex.what();
     } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (DeadUser& ex) {
         cout << ex.what();
     } catch (DeadVotee& ex) {
         cout << ex.what();
@@ -274,7 +280,8 @@ void GameManager::end_night() {
         start_day();
         if (!assulted_player->is_healed()) assulted_player->die_in_night();
         show_silents();
-        // do_swap();
+        can_swap = true;
+        swaped = false;
     }
     votes.clear();
 }
@@ -288,4 +295,38 @@ void GameManager::show_silents() {
         for (auto silent : silents) cout << " " << silent;
         cout << endl;
     }
+}
+void GameManager::swap_character(string first_name) {
+    try {
+        string second_name;
+        cin >> second_name;
+        auto first_player = find_player(first_name);
+        if (first_player->get_status() != alive) throw DeadUser();
+        auto second_player = find_player(second_name);
+        if (second_player->get_status() != alive) throw DeadUser();
+
+        if (swaped) throw Swapped();
+        if (phase == night) throw NightSwap();
+        if (!can_swap) throw DaySwap();
+
+        do_swap(first_player, second_player);
+
+    } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (DeadUser& ex) {
+        cout << ex.what();
+    } catch (Swapped& ex) {
+        cout << ex.what();
+    } catch (NightSwap& ex) {
+        cout << ex.what();
+    } catch (DaySwap& ex) {
+        cout << ex.what();
+    }
+}
+
+void GameManager::do_swap(Player* first_player, Player* second_player) {
+    string first_name = first_player->get_name();
+    string second_name = second_player->get_name();
+    second_player->change_character_to(first_name, first_player->is_silent());
+    first_player->change_character_to(first_name, first_player->is_silent());
 }
