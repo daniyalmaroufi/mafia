@@ -280,8 +280,10 @@ void GameManager::start_night() {
     cout << "Night " << night_counter << endl;
     for (auto player : players) {
         player->unsilence();
-        if (player->need_to_wake_up() && player->get_status() == alive)
+        if (player->need_to_wake_up() && player->get_status() == alive) {
             player->show_info();
+            player->reset_to_first_night();
+        }
     }
 }
 

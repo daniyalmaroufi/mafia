@@ -17,6 +17,7 @@ class Player {
     Player_status get_status();
     virtual bool need_to_wake_up();
     virtual bool can_wake_up();
+    virtual void reset_to_first_night(){};
     virtual bool do_nighttask_on(Player* second_player) = 0;
     virtual bool is_mafia() = 0;
     void heal();

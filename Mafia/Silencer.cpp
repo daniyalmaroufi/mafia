@@ -9,6 +9,8 @@ void Silencer::show_info() {
 
 bool Silencer::need_to_wake_up() { return true; }
 
+void Silencer::reset_to_first_night() { done_nighttask = false; }
+
 bool Silencer::do_nighttask_on(Player* second_player) {
     if (!done_nighttask) {
         if (second_player->get_status() != alive) throw DeadPerson();

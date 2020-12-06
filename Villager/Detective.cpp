@@ -11,6 +11,8 @@ void Detective::show_info() {
 
 bool Detective::need_to_wake_up() { return true; }
 
+void Detective::reset_to_first_night() { done_nighttask = false; }
+
 bool Detective::do_nighttask_on(Player* second_player) {
     if (!done_nighttask) {
         if (second_player->get_status() != alive) throw DeadSuspect();

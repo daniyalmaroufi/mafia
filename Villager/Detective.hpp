@@ -14,6 +14,7 @@ class Detective : public Villager {
     void show_info();
     bool need_to_wake_up();
     bool do_nighttask_on(Player* second_player);
+    void reset_to_first_night();
 
    private:
    bool done_nighttask;

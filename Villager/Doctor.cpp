@@ -9,11 +9,12 @@ void Doctor::show_info() {
 
 bool Doctor::need_to_wake_up() { return true; }
 
+void Doctor::reset_to_first_night() { done_nighttask = false; }
+
 bool Doctor::do_nighttask_on(Player* second_player) {
     if (!done_nighttask) {
         if (second_player->get_status() != alive) throw DeadPatient();
         second_player->heal();
-
         done_nighttask = true;
     } else {
         throw DoctorHealed();
