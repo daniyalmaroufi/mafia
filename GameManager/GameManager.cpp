@@ -18,6 +18,14 @@ void GameManager::handle_inputs() {
             return;
             // reset_game();
         }
+        if (winner == the_villagers) {
+            cout << "Villagers won" << endl;
+            return;
+        }
+        if (winner == the_mafias) {
+            cout << "Mafia won" << endl;
+            return;
+        }
     }
 }
 
@@ -243,6 +251,14 @@ bool GameManager::check_winner() {
             winner = the_joker;
             return true;
         }
+    }
+    if (alive_mafias() == 0) {
+        winner = the_mafias;
+        return true;
+    }
+    if (alive_villagers() == 0) {
+        winner = the_villagers;
+        return true;
     }
     return false;
 }

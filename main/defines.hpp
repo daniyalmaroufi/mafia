@@ -18,6 +18,6 @@ enum Player_status {
     silent
 };
 
-enum Player_types { mafias, villagers, the_joker };
+enum Player_types { the_mafias, the_villagers, the_joker };
 
 #endif
