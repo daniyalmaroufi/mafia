@@ -60,7 +60,7 @@ class GameManager {
     Player* find_player(string name);
     void end_vote();
     string find_selected();
-    void check_winner();
+    bool check_winner();
 
     vector<User> users;
     vector<Player*> players;

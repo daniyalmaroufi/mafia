@@ -7,4 +7,7 @@ void Villager::show_info() {
               << "villager" << std::endl;
 }
 
-void Villager::die_in_day() { status = villager_dead; }
+void Villager::die_in_day() {
+    status = villager_dead;
+    std::cout << name << " died" << std::endl;
+}

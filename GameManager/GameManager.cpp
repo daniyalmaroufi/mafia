@@ -9,6 +9,10 @@ void GameManager::handle_inputs() {
     string command;
     while (cin >> command) {
         handle_command(command);
+        if (winner == the_joker) {
+            cout << "Joker won" << endl;
+            return;
+        }
     }
 }
 
@@ -175,7 +179,9 @@ Player* GameManager::find_player(string name) {
 void GameManager::end_vote() {
     string selected_player = find_selected();
     find_player(selected_player)->die_in_day();
-    check_winner();
+    if (!check_winner()) {
+        // start_night();
+    }
 }
 
 string GameManager::find_selected() {
@@ -194,10 +200,14 @@ string GameManager::find_selected() {
     return selected;
 }
 
-void GameManager::check_winner() {
+bool GameManager::check_winner() {
     map<Player_status, int> players_status;
     for (auto player : players) {
         players_status[player->get_status()] += 1;
-        if (player->get_status() == joker_won) winner = the_joker;
+        if (player->get_status() == joker_won) {
+            winner = the_joker;
+            return true;
+        }
     }
+    return false;
 }
