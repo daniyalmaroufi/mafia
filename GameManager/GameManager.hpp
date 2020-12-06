@@ -68,8 +68,9 @@ class GameManager {
     void show_silents();
     void swap_character(string first_name);
     void do_swap(Player* first_player, Player* second_player);
-    int alive_mafia();
-    int alive_villager();
+    int alive_mafias();
+    int alive_villagers();
+    void game_state();
 
     vector<User> users;
     vector<Player*> players;

@@ -37,10 +37,17 @@ void GameManager::handle_command(string command) {
         return;
     }
 
-    if (!command.compare(SWAP_COMMAND))
+    if (!command.compare(SWAP_COMMAND)) {
         swap_character(command);
-    else
+        return;
+    } else {
         can_swap = false;
+    }
+
+    if (!command.compare(GAME_STATE_COMMAND)) {
+        game_state();
+        return;
+    }
 
     if (phase == day && game_started) {
         if (!command.compare(END_VOTE_COMMAND))
@@ -285,14 +292,13 @@ void GameManager::end_night() {
     string selected_player = find_selected();
     auto assulted_player = find_player(selected_player);
     assulted_player->assult();
-    if (!check_winner()) {
-        start_day();
-        assulted_player->die_in_night();
-        show_silents();
-        can_swap = true;
-        swaped = false;
-    }
+    start_day();
+    assulted_player->die_in_night();
+    show_silents();
+    can_swap = true;
+    swaped = false;
     votes.clear();
+    check_winner();
 }
 
 void GameManager::show_silents() {
@@ -340,4 +346,23 @@ void GameManager::do_swap(Player* first_player, Player* second_player) {
     bool second_silent = second_player->is_silent();
     second_player->change_character_to(first_name, first_silent);
     first_player->change_character_to(second_name, second_silent);
+}
+
+int GameManager::alive_mafias() {
+    int deads = 0;
+    for (auto player : players)
+        if (player->get_status() == mafia_dead) deads += 1;
+    return total_mafia - deads;
+}
+
+int GameManager::alive_villagers() {
+    int deads = 0;
+    for (auto player : players)
+        if (player->get_status() == villager_dead) deads += 1;
+    return total_villager - deads;
+}
+
+void GameManager::game_state() {
+    cout << "Mafia = " << alive_mafias() << endl;
+    cout << "Villager = " << alive_villagers() << endl;
 }
