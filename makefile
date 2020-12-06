@@ -12,8 +12,10 @@ CPP=$(CPP_EXEC) $(CPP_STD) $(CPP_FLAGS) -g
 
 all: mafia.out
 
-mafia.out: obj/main.o obj/game_manager.o obj/mafia.o obj/player.o obj/joker.o obj/godfather.o obj/silencer.o obj/villager.o obj/detective.o obj/doctor.o obj/bulletproof.o
-	$(CPP) obj/main.o obj/game_manager.o obj/mafia.o  obj/player.o obj/joker.o obj/godfather.o obj/silencer.o obj/villager.o obj/detective.o obj/doctor.o obj/bulletproof.o -o mafia.out
+mafia.out: obj/main.o obj/game_manager.o obj/mafia.o obj/player.o obj/joker.o\
+ obj/godfather.o obj/silencer.o obj/villager.o obj/detective.o obj/doctor.o obj/bulletproof.o
+	$(CPP) obj/main.o obj/game_manager.o obj/mafia.o  obj/player.o obj/joker.o\
+	 obj/godfather.o obj/silencer.o obj/villager.o obj/detective.o obj/doctor.o obj/bulletproof.o -o mafia.out
 
 obj/main.o: main/main.cpp
 	$(CPP) -c main/main.cpp -o obj/main.o

@@ -13,6 +13,7 @@ void GameManager::handle_inputs() {
         if (winner == the_joker) {
             cout << "Joker won" << endl;
             return;
+            // reset_game();
         }
     }
 }
@@ -251,6 +252,10 @@ void GameManager::vote_in_night(string voter) {
     } catch (DetectiveAsked& ex) {
         cout << ex.what();
     } catch (DeadSuspect& ex) {
+        cout << ex.what();
+    } catch (DoctorHealed& ex) {
+        cout << ex.what();
+    } catch (DeadPatient& ex) {
         cout << ex.what();
     }
 }

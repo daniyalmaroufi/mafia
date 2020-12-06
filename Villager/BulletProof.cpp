@@ -9,10 +9,10 @@ void BulletProof::show_info() {
               << "bulletproof" << std::endl;
 }
 
-void BulletProof::die_in_day() {
-    if (killed_once) {
-        status = villager_dead;
-        std::cout << name << " died" << std::endl;
-    } else
-        killed_once = true;
-}
+// void BulletProof::die_in_day() {
+//     // if (killed_once) {
+//         status = villager_dead;
+//         std::cout << name << " died" << std::endl;
+//     // } else
+//     //     killed_once = true;
+// }

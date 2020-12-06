@@ -64,4 +64,18 @@ public:
     }
 };
 
+class DoctorHealed : public std::exception {
+public:
+    const char* what() {
+        return "Doctor has already healed\n";
+    }
+};
+
+class DeadPatient : public std::exception {
+public:
+    const char* what() {
+        return "Patient is dead\n";
+    }
+};
+
 #endif

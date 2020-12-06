@@ -18,10 +18,12 @@ class Player {
     virtual bool need_to_wake_up();
     virtual bool do_nighttask_on(Player* second_player) = 0;
     virtual bool is_mafia() = 0;
+    void heal();
 
    protected:
     std::string name;
     Player_status status;
+    bool healed;
 };
 
 #endif
