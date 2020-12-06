@@ -61,12 +61,14 @@ class GameManager {
     void end_vote();
     string find_selected();
     bool check_winner();
+    void start_night();
 
     vector<User> users;
     vector<Player*> players;
     bool game_created;
     bool game_started;
     int day_counter;
+    int night_counter;
     game_phase phase;
     map<string, string> votes;
     Player_types winner;

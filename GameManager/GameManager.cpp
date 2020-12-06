@@ -3,6 +3,7 @@
 GameManager::GameManager() {
     game_started = false;
     day_counter = 0;
+    night_counter = 0;
 }
 
 void GameManager::handle_inputs() {
@@ -74,9 +75,9 @@ void GameManager::assign_role_command() {
         cin >> name >> role;
         int user = find_user(name);
         set_user_role(user, role);
-    } catch (NoUser& ex) {
-        cout << ex.what();
     } catch (NoGame& ex) {
+        cout << ex.what();
+    } catch (NoUser& ex) {
         cout << ex.what();
     }
 }
@@ -133,9 +134,9 @@ void GameManager::start_game_command() {
         cout << "Ready? Set! Go." << endl;
         start_day();
 
-    } catch (NoGame& ex) {
-        cout << ex.what();
     } catch (NoRole& ex) {
+        cout << ex.what();
+    } catch (NoGame& ex) {
         cout << ex.what();
     } catch (GameStarted& ex) {
         cout << ex.what();
@@ -162,9 +163,11 @@ void GameManager::vote_in_day(string voter) {
         string votee;
         cin >> votee;
         find_player(voter);
-        find_player(votee);
+        if (find_player(votee)->get_status() != alive) throw DeadVotee();
         votes[voter] = votee;
     } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (DeadVotee& ex) {
         cout << ex.what();
     }
 }
@@ -180,8 +183,9 @@ void GameManager::end_vote() {
     string selected_player = find_selected();
     find_player(selected_player)->die_in_day();
     if (!check_winner()) {
-        // start_night();
+        start_night();
     }
+    votes.clear();
 }
 
 string GameManager::find_selected() {
@@ -210,4 +214,14 @@ bool GameManager::check_winner() {
         }
     }
     return false;
+}
+
+void GameManager::start_night() {
+    phase = night;
+    night_counter += 1;
+    cout << "Night: " << night_counter << endl;
+    for (auto p : players) {
+        if (p->need_to_wake_up() && p->get_status() == alive)
+            p->show_info();
+    }
 }

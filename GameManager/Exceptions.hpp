@@ -29,4 +29,11 @@ public:
     }
 };
 
+class DeadVotee : public std::exception {
+public:
+    const char* what() {
+        return "Votee is already dead\n";
+    }
+};
+
 #endif

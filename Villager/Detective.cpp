@@ -6,3 +6,5 @@ void Detective::show_info() {
     std::cout << name << ": "
               << "detective" << std::endl;
 }
+
+bool Detective::need_to_wake_up() { return true; }

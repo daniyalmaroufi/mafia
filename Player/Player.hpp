@@ -14,10 +14,12 @@ class Player {
     bool is_name(std::string name_);
     virtual void die_in_day() = 0;
     Player_status get_status();
+    virtual bool need_to_wake_up();
 
    protected:
     std::string name;
     Player_status status;
+    bool silenced;
 };
 
 #endif

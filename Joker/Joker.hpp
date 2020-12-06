@@ -14,6 +14,7 @@ class Joker : public Player {
     Joker(){};
     void show_info();
     void die_in_day();
+    bool need_to_wake_up();
 
    private:
 };

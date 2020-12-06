@@ -11,3 +11,5 @@ void Joker::die_in_day() {
     status = joker_won;
     std::cout << name << " died" << std::endl;
 }
+
+bool Joker::need_to_wake_up() { return false; }

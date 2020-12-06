@@ -11,3 +11,5 @@ void Mafia::die_in_day() {
     status = mafia_dead;
     std::cout << name << " died" << std::endl;
 }
+
+bool Mafia::need_to_wake_up() { return true; }

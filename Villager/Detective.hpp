@@ -12,6 +12,7 @@ class Detective : public Villager {
     Detective(std::string name_);
     Detective(){};
     void show_info();
+    bool need_to_wake_up();
 
    private:
 };

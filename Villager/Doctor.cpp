@@ -6,3 +6,5 @@ void Doctor::show_info() {
     std::cout << name << ": "
               << "doctor" << std::endl;
 }
+
+bool Doctor::need_to_wake_up() { return true; }

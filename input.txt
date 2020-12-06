@@ -1,11 +1,11 @@
+r
 create_game a b c
 assign_role a mafia
 assign_role a joker
-assign_role c villager
-assign_role b villager
+assign_role c mafia
+assign_role b doctor
 start_game
-b a
-c a
-a c
-x d
+b c
+c b
+x d 
 end_vote
