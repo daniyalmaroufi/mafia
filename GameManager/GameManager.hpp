@@ -68,6 +68,8 @@ class GameManager {
     void show_silents();
     void swap_character(string first_name);
     void do_swap(Player* first_player, Player* second_player);
+    int alive_mafia();
+    int alive_villager();
 
     vector<User> users;
     vector<Player*> players;
@@ -80,6 +82,8 @@ class GameManager {
     Player_types winner;
     bool can_swap;
     bool swaped;
+    int total_mafia;
+    int total_villager;
 };
 
 #endif

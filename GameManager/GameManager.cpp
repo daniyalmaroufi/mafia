@@ -5,6 +5,8 @@ GameManager::GameManager() {
     day_counter = 0;
     night_counter = 0;
     can_swap = false;
+    total_mafia = 0;
+    total_villager = 0;
 }
 
 void GameManager::handle_inputs() {
@@ -115,24 +117,31 @@ void GameManager::create_players() {
         }
         if (user.role == villager) {
             players.push_back(new Villager(user.name));
+            total_villager += 1;
         }
         if (user.role == detective) {
             players.push_back(new Detective(user.name));
+            total_villager += 1;
         }
         if (user.role == doctor) {
             players.push_back(new Doctor(user.name));
+            total_villager += 1;
         }
         if (user.role == bulletproof) {
             players.push_back(new BulletProof(user.name));
+            total_villager += 1;
         }
         if (user.role == mafia) {
             players.push_back(new Mafia(user.name));
+            total_mafia += 1;
         }
         if (user.role == godfather) {
             players.push_back(new GodFather(user.name));
+            total_mafia += 1;
         }
         if (user.role == silencer) {
             players.push_back(new Silencer(user.name));
+            total_mafia += 1;
         }
     }
     remove_users();
@@ -195,12 +204,12 @@ Player* GameManager::find_player(string name) {
 }
 
 void GameManager::end_vote() {
-    string selected_player = find_selected();
-    find_player(selected_player)->die_in_day();
-    if (!check_winner()) {
-        start_night();
+    if (!votes.empty()) {
+        string selected_player = find_selected();
+        find_player(selected_player)->die_in_day();
+        votes.clear();
     }
-    votes.clear();
+    if (!check_winner()) start_night();
 }
 
 string GameManager::find_selected() {
