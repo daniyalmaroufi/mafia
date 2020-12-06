@@ -39,7 +39,7 @@ public:
 class DeadVotee : public std::exception {
 public:
     const char* what() {
-        return "Votee is already dead\n";
+        return "Votee already dead\n";
     }
 };
 
@@ -102,7 +102,7 @@ public:
 class NightSwap : public std::exception {
 public:
     const char* what() {
-        return "Can't swap before end on night\n";
+        return "Can't swap before end of night\n";
     }
 };
 

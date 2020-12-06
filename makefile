@@ -8,7 +8,7 @@ JOKER_DIR=Joker/
 VILLAGER_DIR=Villager/
 
 
-CPP=$(CPP_EXEC) $(CPP_STD) $(CPP_FLAGS) -g
+CPP=$(CPP_EXEC) $(CPP_STD) $(CPP_FLAGS)
 
 all: mafia.out
 

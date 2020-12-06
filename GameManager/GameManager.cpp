@@ -1,10 +1,11 @@
 #include "./GameManager.hpp"
 
 GameManager::GameManager() {
-    game_created=false;
+    game_created = false;
     game_started = false;
     day_counter = 0;
     night_counter = 0;
+    swaped = false;
     can_swap = false;
     alive_mafia = 0;
     alive_villager = 0;
@@ -202,11 +203,14 @@ void GameManager::vote_in_day(string voter) {
     try {
         string votee;
         cin >> votee;
-        find_player(voter);
-        if (find_player(voter)->is_silent()) throw SilentVoter();
+        Player* the_voter = find_player(voter);
+        if (the_voter->is_silent()) throw SilentVoter();
+        if (the_voter->get_status() != alive) throw DeadUser();
         if (find_player(votee)->get_status() != alive) throw DeadVotee();
         votes[voter] = votee;
     } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (DeadUser& ex) {
         cout << ex.what();
     } catch (SilentVoter& ex) {
         cout << ex.what();
@@ -352,9 +356,9 @@ void GameManager::swap_character() {
         if (first_player->get_status() != alive) throw DeadUser();
         auto second_player = find_player(second_name);
         if (second_player->get_status() != alive) throw DeadUser();
-        if (swaped) throw Swapped();
         if (phase == night) throw NightSwap();
         if (!can_swap) throw DaySwap();
+        if (swaped) throw Swapped();
 
         do_swap(first_player, second_player);
 
@@ -386,6 +390,7 @@ void GameManager::do_swap(Player* first_player, Player* second_player) {
     }
     players[first_player_place] = second_player;
     players[second_player_place] = first_player;
+    swaped = true;
 }
 
 void GameManager::game_state() {
