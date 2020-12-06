@@ -12,7 +12,8 @@ class Silencer : public Mafia {
     Silencer(std::string name_);
     Silencer(){};
     void show_info();
-    
+    bool do_nighttask_on(Player* second_player);
+
    private:
 };
 

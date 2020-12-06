@@ -13,6 +13,7 @@ class Detective : public Villager {
     Detective(){};
     void show_info();
     bool need_to_wake_up();
+    bool do_nighttask_on(Player* second_player);
 
    private:
 };

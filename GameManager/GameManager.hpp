@@ -62,6 +62,7 @@ class GameManager {
     string find_selected();
     bool check_winner();
     void start_night();
+    void vote_in_night(string voter);
 
     vector<User> users;
     vector<Player*> players;

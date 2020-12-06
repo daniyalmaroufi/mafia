@@ -8,3 +8,7 @@ void Detective::show_info() {
 }
 
 bool Detective::need_to_wake_up() { return true; }
+
+bool Detective::do_nighttask_on(Player* second_player) {
+    return false;
+}

@@ -2,10 +2,11 @@
 #define __MAFIA__
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include "../main/defines.hpp"
+#include <vector>
+
 #include "../Player/Player.hpp"
+#include "../main/defines.hpp"
 
 class Mafia : public Player {
    public:
@@ -14,7 +15,7 @@ class Mafia : public Player {
     void show_info();
     void die_in_day();
     bool need_to_wake_up();
-
+    bool do_nighttask_on(Player* second_player);
 
    private:
 };

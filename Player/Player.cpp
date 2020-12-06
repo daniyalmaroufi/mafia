@@ -3,7 +3,6 @@
 Player::Player(std::string name_) {
     name = name_;
     status = alive;
-    silenced = false;
 }
 
 bool Player::is_name(std::string name_) { return name == name_; }

@@ -8,3 +8,7 @@ void Doctor::show_info() {
 }
 
 bool Doctor::need_to_wake_up() { return true; }
+
+bool Doctor::do_nighttask_on(Player* second_player) {
+    return false;
+}

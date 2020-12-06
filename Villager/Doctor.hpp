@@ -13,6 +13,7 @@ class Doctor : public Villager {
     Doctor(){};
     void show_info();
     bool need_to_wake_up();
+    bool do_nighttask_on(Player* second_player);
 
    private:
 };

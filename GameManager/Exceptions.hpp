@@ -36,4 +36,18 @@ public:
     }
 };
 
+class CannotWakeup : public std::exception {
+public:
+    const char* what() {
+        return "User can not wake up during night\n";
+    }
+};
+
+class DeadUser : public std::exception {
+public:
+    const char* what() {
+        return "User is dead\n";
+    }
+};
+
 #endif

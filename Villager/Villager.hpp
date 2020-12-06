@@ -13,6 +13,7 @@ class Villager : public Player {
     Villager(){};
     void show_info();
     void die_in_day();
+    bool do_nighttask_on(Player* second_player);
 
    private:
 };

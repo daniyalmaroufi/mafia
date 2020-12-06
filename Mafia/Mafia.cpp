@@ -13,3 +13,7 @@ void Mafia::die_in_day() {
 }
 
 bool Mafia::need_to_wake_up() { return true; }
+
+bool Mafia::do_nighttask_on(Player* second_player) {
+    return true;
+}

@@ -23,7 +23,7 @@ void GameManager::handle_command(string command) {
         return;
     }
 
-    if (!command.compare(ASSIGN_ROLE_COMMAND)) {
+    if (!command.compare(ASSIGN_ROLE_COMMAND) && !game_started) {
         assign_role_command();
         return;
     }
@@ -39,6 +39,10 @@ void GameManager::handle_command(string command) {
         else
             vote_in_day(command);
         return;
+    }
+
+    if (phase == night && game_started) {
+        vote_in_night(command);
     }
 }
 
@@ -221,7 +225,29 @@ void GameManager::start_night() {
     night_counter += 1;
     cout << "Night: " << night_counter << endl;
     for (auto p : players) {
-        if (p->need_to_wake_up() && p->get_status() == alive)
-            p->show_info();
+        if (p->need_to_wake_up() && p->get_status() == alive) p->show_info();
+    }
+}
+
+void GameManager::vote_in_night(string voter) {
+    try {
+        string votee;
+        cin >> votee;
+        auto the_voter = find_player(voter);
+        if (!the_voter->need_to_wake_up()) throw CannotWakeup();
+        if (the_voter->get_status() != alive) throw DeadUser();
+        
+        auto the_votee = find_player(votee);
+        if (the_votee->get_status() != alive) throw DeadVotee();
+        if (the_voter->do_nighttask_on(the_votee)) votes[voter] = votee;
+
+    } catch (CannotWakeup& ex) {
+        cout << ex.what();
+    } catch (DeadUser& ex) {
+        cout << ex.what();
+    } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (DeadVotee& ex) {
+        cout << ex.what();
     }
 }
