@@ -14,6 +14,7 @@ class BulletProof : public Villager {
     void show_info();
 
    private:
+   bool killed_once;
 };
 
 #endif
