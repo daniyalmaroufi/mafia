@@ -12,11 +12,9 @@ Player_status Player::get_status() { return status; }
 
 bool Player::need_to_wake_up() { return false; }
 
-bool Player::can_wake_up() { return need_to_wake_up(); }
-
 void Player::heal() { healed = true; }
 
-void Player::silence() { status = silent; }
+void Player::silence() { silent = true; }
 
 void Player::assult() {
     std::cout << "Mafia tried to kill " << name << std::endl;
@@ -24,15 +22,15 @@ void Player::assult() {
 
 bool Player::is_healed() { return healed; }
 
-bool Player::is_silent() { return status == silent; }
+bool Player::is_silent() { return silent; }
 
-void Player::unsilence() { status = alive; }
+void Player::unsilence() { silent = false; }
 
 std::string Player::get_name() { return name; }
 
-void Player::change_character_to(std::string name_, bool silent) {
+void Player::change_character_to(std::string name_, bool silent_) {
     name = name_;
-    if (silent)
+    if (silent_)
         silence();
     else
         unsilence();

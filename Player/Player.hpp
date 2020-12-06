@@ -16,7 +16,6 @@ class Player {
     virtual void die_in_day() = 0;
     Player_status get_status();
     virtual bool need_to_wake_up();
-    virtual bool can_wake_up();
     virtual void reset_to_first_night(){};
     virtual bool do_nighttask_on(Player* second_player) = 0;
     virtual bool is_mafia() = 0;
@@ -28,12 +27,13 @@ class Player {
     std::string get_name();
     virtual void assult();
     virtual void die_in_night() = 0;
-    void change_character_to(std::string name_, bool silent);
+    void change_character_to(std::string name_, bool silent_);
 
    protected:
     std::string name;
     Player_status status;
     bool healed;
+    bool silent;
 };
 
 #endif

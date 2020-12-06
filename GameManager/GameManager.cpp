@@ -202,7 +202,7 @@ void GameManager::vote_in_day(string voter) {
         string votee;
         cin >> votee;
         find_player(voter);
-        if (find_player(voter)->get_status() == silent) throw SilentVoter();
+        if (find_player(voter)->is_silent()) throw SilentVoter();
         if (find_player(votee)->get_status() != alive) throw DeadVotee();
         votes[voter] = votee;
     } catch (NoUser& ex) {
@@ -292,7 +292,7 @@ void GameManager::vote_in_night(string voter) {
         string votee;
         cin >> votee;
         auto the_voter = find_player(voter);
-        if (!the_voter->can_wake_up()) throw CannotWakeup();
+        if (!the_voter->need_to_wake_up()) throw CannotWakeup();
         if (the_voter->get_status() != alive) throw DeadUser();
 
         auto the_votee = find_player(votee);

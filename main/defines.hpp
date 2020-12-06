@@ -14,8 +14,7 @@ enum Player_status {
     villager_dead,
     mafia_dead,
     joker_won,
-    joker_dead,
-    silent
+    joker_dead
 };
 
 enum Player_types { the_mafias, the_villagers, the_joker };
