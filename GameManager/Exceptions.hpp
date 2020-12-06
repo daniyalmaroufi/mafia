@@ -29,6 +29,13 @@ public:
     }
 };
 
+class SilentVoter : public std::exception {
+public:
+    const char* what() {
+        return "Voter is silenced\n";
+    }
+};
+
 class DeadVotee : public std::exception {
 public:
     const char* what() {

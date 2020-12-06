@@ -11,4 +11,7 @@ x d
 end_vote
 get_game_state
 b a
+a d
 d a
+end_night
+swap_character a d

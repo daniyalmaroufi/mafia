@@ -14,6 +14,8 @@ void Mafia::die_in_day() {
 
 bool Mafia::need_to_wake_up() { return false; }
 
+bool Mafia::can_wake_up() { return true; }
+
 bool Mafia::do_nighttask_on(Player* second_player) {
     if (second_player->get_status() != alive) throw DeadVotee();
     return true;
@@ -22,7 +24,7 @@ bool Mafia::do_nighttask_on(Player* second_player) {
 bool Mafia::is_mafia() { return true; }
 
 void Mafia::die_in_night() {
-    if(healed) return;
+    if (healed) return;
     status = mafia_dead;
     std::cout << name << " was killed" << std::endl;
 }

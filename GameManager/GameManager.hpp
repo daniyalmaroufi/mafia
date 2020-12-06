@@ -67,7 +67,7 @@ class GameManager {
     void vote_in_night(string voter);
     void end_night();
     void show_silents();
-    void swap_character(string first_name);
+    void swap_character();
     void do_swap(Player* first_player, Player* second_player);
     void game_state();
 

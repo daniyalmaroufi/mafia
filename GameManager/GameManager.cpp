@@ -46,7 +46,7 @@ void GameManager::handle_command(string command) {
     }
 
     if (!command.compare(SWAP_COMMAND)) {
-        swap_character(command);
+        swap_character();
         return;
     } else {
         can_swap = false;
@@ -202,9 +202,12 @@ void GameManager::vote_in_day(string voter) {
         string votee;
         cin >> votee;
         find_player(voter);
+        if (find_player(voter)->get_status() == silent) throw SilentVoter();
         if (find_player(votee)->get_status() != alive) throw DeadVotee();
         votes[voter] = votee;
     } catch (NoUser& ex) {
+        cout << ex.what();
+    } catch (SilentVoter& ex) {
         cout << ex.what();
     } catch (DeadVotee& ex) {
         cout << ex.what();
@@ -214,7 +217,6 @@ void GameManager::vote_in_day(string voter) {
 Player* GameManager::find_player(string name) {
     for (auto player : players)
         if (player->is_name(name)) return player;
-    return NULL;
     throw NoUser();
 }
 
@@ -337,15 +339,16 @@ void GameManager::show_silents() {
         cout << endl;
     }
 }
-void GameManager::swap_character(string first_name) {
+void GameManager::swap_character() {
     try {
+        string first_name;
+        cin >> first_name;
         string second_name;
         cin >> second_name;
         auto first_player = find_player(first_name);
         if (first_player->get_status() != alive) throw DeadUser();
         auto second_player = find_player(second_name);
         if (second_player->get_status() != alive) throw DeadUser();
-
         if (swaped) throw Swapped();
         if (phase == night) throw NightSwap();
         if (!can_swap) throw DaySwap();
