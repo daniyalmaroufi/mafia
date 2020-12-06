@@ -278,7 +278,7 @@ void GameManager::end_night() {
     assulted_player->assult();
     if (!check_winner()) {
         start_day();
-        if (!assulted_player->is_healed()) assulted_player->die_in_night();
+        assulted_player->die_in_night();
         show_silents();
         can_swap = true;
         swaped = false;
@@ -326,7 +326,9 @@ void GameManager::swap_character(string first_name) {
 
 void GameManager::do_swap(Player* first_player, Player* second_player) {
     string first_name = first_player->get_name();
+    bool first_silent = first_player->is_silent();
     string second_name = second_player->get_name();
-    second_player->change_character_to(first_name, first_player->is_silent());
-    first_player->change_character_to(first_name, first_player->is_silent());
+    bool second_silent = second_player->is_silent();
+    second_player->change_character_to(first_name, first_silent);
+    first_player->change_character_to(second_name, second_silent);
 }

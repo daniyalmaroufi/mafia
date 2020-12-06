@@ -10,6 +10,7 @@ void BulletProof::show_info() {
 }
 
 void BulletProof::die_in_night() {
+    if (healed) return;
     if (killed_once) {
         Villager::die_in_night();
     } else {

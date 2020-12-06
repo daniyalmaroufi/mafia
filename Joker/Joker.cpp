@@ -19,6 +19,7 @@ bool Joker::do_nighttask_on(Player* second_player) { return false; }
 bool Joker::is_mafia() { return false; }
 
 void Joker::die_in_night() {
+    if (healed) return;
     status = joker_dead;
     std::cout << name << " was killed" << std::endl;
 }

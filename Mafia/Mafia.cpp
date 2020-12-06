@@ -22,6 +22,7 @@ bool Mafia::do_nighttask_on(Player* second_player) {
 bool Mafia::is_mafia() { return true; }
 
 void Mafia::die_in_night() {
+    if(healed) return;
     status = mafia_dead;
     std::cout << name << " was killed" << std::endl;
 }

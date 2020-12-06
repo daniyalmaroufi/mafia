@@ -16,6 +16,7 @@ enum Player_status {
     joker_dead,
     silent
 };
+
 enum Player_types { mafias, villagers, the_joker };
 
 #endif
