@@ -1,5 +1,5 @@
 r
-create_game a b c d
+create_game b d c a
 assign_role a joker
 assign_role c mafia
 assign_role d mafia
@@ -11,3 +11,4 @@ x d
 end_vote
 b a
 d a
+end_night

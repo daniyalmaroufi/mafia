@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "../main/defines.hpp"
 #include "../GameManager/Exceptions.hpp"
+#include "../main/defines.hpp"
 
 class Player {
    public:
@@ -19,9 +19,13 @@ class Player {
     virtual bool do_nighttask_on(Player* second_player) = 0;
     virtual bool is_mafia() = 0;
     void heal();
+    bool is_healed();
     void silence();
+    void unsilence();
+    bool is_silent();
+    std::string get_name();
     virtual void assult();
-    virtual void die_in_night();
+    virtual void die_in_night() = 0;
 
    protected:
     std::string name;

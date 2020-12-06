@@ -5,6 +5,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <set>
 
 #include "../Joker/Joker.hpp"
 #include "../Mafia/GodFather.hpp"
@@ -64,6 +65,7 @@ class GameManager {
     void start_night();
     void vote_in_night(string voter);
     void end_night();
+    void show_silents();
 
     vector<User> users;
     vector<Player*> players;

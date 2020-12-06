@@ -20,4 +20,10 @@ void Player::assult() {
     std::cout << "Mafia tried to kill " << name << std::endl;
 }
 
-void Player::die_in_night() {}
+bool Player::is_healed() { return healed; }
+
+bool Player::is_silent() { return status == silent; }
+
+void Player::unsilence() { status = alive; }
+
+std::string Player::get_name() { return name; }

@@ -7,7 +7,14 @@
 #define END_VOTE_COMMAND "end_vote"
 #define END_NIGHT_COMMAND "end_night"
 
-enum Player_status { alive, villager_dead, mafia_dead, joker_dead, silent };
+enum Player_status {
+    alive,
+    villager_dead,
+    mafia_dead,
+    joker_won,
+    joker_dead,
+    silent
+};
 enum Player_types { mafias, villagers, the_joker };
 
 #endif

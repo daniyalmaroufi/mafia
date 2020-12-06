@@ -14,8 +14,7 @@ bool Silencer::do_nighttask_on(Player* second_player) {
 
         done_nighttask = true;
     } else {
-        if (second_player->get_status() != alive) throw DeadVotee();
-        return true;
+        return Mafia::do_nighttask_on(second_player);
     }
     return false;
 }

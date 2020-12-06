@@ -217,7 +217,7 @@ bool GameManager::check_winner() {
     map<Player_status, int> players_status;
     for (auto player : players) {
         players_status[player->get_status()] += 1;
-        if (player->get_status() == joker_dead) {
+        if (player->get_status() == joker_won) {
             winner = the_joker;
             return true;
         }
@@ -229,8 +229,10 @@ void GameManager::start_night() {
     phase = night;
     night_counter += 1;
     cout << "Night: " << night_counter << endl;
-    for (auto p : players) {
-        if (p->need_to_wake_up() && p->get_status() == alive) p->show_info();
+    for (auto player : players) {
+        player->unsilence();
+        if (player->need_to_wake_up() && player->get_status() == alive)
+            player->show_info();
     }
 }
 
@@ -266,9 +268,24 @@ void GameManager::vote_in_night(string voter) {
 
 void GameManager::end_night() {
     string selected_player = find_selected();
-    find_player(selected_player)->die_in_night();
+    auto assulted_player = find_player(selected_player);
+    assulted_player->assult();
     if (!check_winner()) {
-        start_night();
+        start_day();
+        if (!assulted_player->is_healed()) assulted_player->die_in_night();
+        show_silents();
+        // do_swap();
     }
     votes.clear();
+}
+
+void GameManager::show_silents() {
+    set<string> silents;
+    for (auto player : players)
+        if (player->is_silent()) silents.insert(player->get_name());
+    if (!silents.empty()) {
+        cout << "Silenced";
+        for (auto silent : silents) cout << " " << silent;
+        cout << endl;
+    }
 }

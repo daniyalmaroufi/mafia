@@ -12,6 +12,7 @@ class BulletProof : public Villager {
     BulletProof(std::string name_);
     BulletProof(){};
     void show_info();
+    void die_in_night();
 
    private:
    bool killed_once;
