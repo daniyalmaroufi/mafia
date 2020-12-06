@@ -1,21 +1,14 @@
 r
 create_game b d c a
-assign_role a joker
-get_game_state
+assign_role a detective
 assign_role c mafia
 assign_role d mafia
 assign_role b doctor
 start_game
-get_game_state
 b c
-get_game_state
 a c
-get_game_state
-x d 
+x d
 end_vote
 get_game_state
 b a
 d a
-get_game_state
-end_night
-get_game_state

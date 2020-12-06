@@ -12,6 +12,8 @@ Player_status Player::get_status() { return status; }
 
 bool Player::need_to_wake_up() { return false; }
 
+bool Player::can_wake_up() { return need_to_wake_up(); }
+
 void Player::heal() { healed = true; }
 
 void Player::silence() { status = silent; }

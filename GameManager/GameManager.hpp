@@ -62,14 +62,13 @@ class GameManager {
     void end_vote();
     string find_selected();
     bool check_winner();
+    void count_alive(Player* the_player);
     void start_night();
     void vote_in_night(string voter);
     void end_night();
     void show_silents();
     void swap_character(string first_name);
     void do_swap(Player* first_player, Player* second_player);
-    int alive_mafias();
-    int alive_villagers();
     void game_state();
 
     vector<User> users;
@@ -83,8 +82,8 @@ class GameManager {
     Player_types winner;
     bool can_swap;
     bool swaped;
-    int total_mafia;
-    int total_villager;
+    int alive_mafia;
+    int alive_villager;
 };
 
 #endif

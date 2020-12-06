@@ -5,8 +5,8 @@ GameManager::GameManager() {
     day_counter = 0;
     night_counter = 0;
     can_swap = false;
-    total_mafia = 0;
-    total_villager = 0;
+    alive_mafia = 0;
+    alive_villager = 0;
 }
 
 void GameManager::handle_inputs() {
@@ -132,31 +132,31 @@ void GameManager::create_players() {
         }
         if (user.role == villager) {
             players.push_back(new Villager(user.name));
-            total_villager += 1;
+            alive_villager += 1;
         }
         if (user.role == detective) {
             players.push_back(new Detective(user.name));
-            total_villager += 1;
+            alive_villager += 1;
         }
         if (user.role == doctor) {
             players.push_back(new Doctor(user.name));
-            total_villager += 1;
+            alive_villager += 1;
         }
         if (user.role == bulletproof) {
             players.push_back(new BulletProof(user.name));
-            total_villager += 1;
+            alive_villager += 1;
         }
         if (user.role == mafia) {
             players.push_back(new Mafia(user.name));
-            total_mafia += 1;
+            alive_mafia += 1;
         }
         if (user.role == godfather) {
             players.push_back(new GodFather(user.name));
-            total_mafia += 1;
+            alive_mafia += 1;
         }
         if (user.role == silencer) {
             players.push_back(new Silencer(user.name));
-            total_mafia += 1;
+            alive_mafia += 1;
         }
     }
     remove_users();
@@ -214,7 +214,7 @@ void GameManager::vote_in_day(string voter) {
 Player* GameManager::find_player(string name) {
     for (auto player : players)
         if (player->is_name(name)) return player;
-
+    return NULL;
     throw NoUser();
 }
 
@@ -222,8 +222,10 @@ void GameManager::end_vote() {
     if (!votes.empty()) {
         string selected_player = find_selected();
         find_player(selected_player)->die_in_day();
+        count_alive(find_player(selected_player));
         votes.clear();
     }
+
     if (!check_winner()) start_night();
 }
 
@@ -252,15 +254,22 @@ bool GameManager::check_winner() {
             return true;
         }
     }
-    if (alive_mafias() == 0) {
-        winner = the_mafias;
-        return true;
-    }
-    if (alive_villagers() == 0) {
+    if (alive_mafia == 0) {
         winner = the_villagers;
         return true;
     }
+    if (alive_villager <= alive_mafia) {
+        winner = the_mafias;
+        return true;
+    }
     return false;
+}
+
+void GameManager::count_alive(Player* the_player) {
+    if (the_player->get_status() == mafia_dead)
+        alive_mafia -= 1;
+    else if (the_player->get_status() == villager_dead)
+        alive_villager -= 1;
 }
 
 void GameManager::start_night() {
@@ -279,7 +288,7 @@ void GameManager::vote_in_night(string voter) {
         string votee;
         cin >> votee;
         auto the_voter = find_player(voter);
-        if (!the_voter->need_to_wake_up()) throw CannotWakeup();
+        if (!the_voter->can_wake_up()) throw CannotWakeup();
         if (the_voter->get_status() != alive) throw DeadUser();
 
         auto the_votee = find_player(votee);
@@ -307,9 +316,10 @@ void GameManager::vote_in_night(string voter) {
 void GameManager::end_night() {
     string selected_player = find_selected();
     auto assulted_player = find_player(selected_player);
-    assulted_player->assult();
+    if (assulted_player) assulted_player->assult();
     start_day();
     assulted_player->die_in_night();
+    count_alive(assulted_player);
     show_silents();
     can_swap = true;
     swaped = false;
@@ -364,21 +374,7 @@ void GameManager::do_swap(Player* first_player, Player* second_player) {
     first_player->change_character_to(second_name, second_silent);
 }
 
-int GameManager::alive_mafias() {
-    int deads = 0;
-    for (auto player : players)
-        if (player->get_status() == mafia_dead) deads += 1;
-    return total_mafia - deads;
-}
-
-int GameManager::alive_villagers() {
-    int deads = 0;
-    for (auto player : players)
-        if (player->get_status() == villager_dead) deads += 1;
-    return total_villager - deads;
-}
-
 void GameManager::game_state() {
-    cout << "Mafia = " << alive_mafias() << endl;
-    cout << "Villager = " << alive_villagers() << endl;
+    cout << "Mafia = " << alive_mafia << endl;
+    cout << "Villager = " << alive_villager << endl;
 }
