@@ -236,9 +236,8 @@ void GameManager::vote_in_night(string voter) {
         auto the_voter = find_player(voter);
         if (!the_voter->need_to_wake_up()) throw CannotWakeup();
         if (the_voter->get_status() != alive) throw DeadUser();
-        
+
         auto the_votee = find_player(votee);
-        if (the_votee->get_status() != alive) throw DeadVotee();
         if (the_voter->do_nighttask_on(the_votee)) votes[voter] = votee;
 
     } catch (CannotWakeup& ex) {
@@ -248,6 +247,10 @@ void GameManager::vote_in_night(string voter) {
     } catch (NoUser& ex) {
         cout << ex.what();
     } catch (DeadVotee& ex) {
+        cout << ex.what();
+    } catch (DetectiveAsked& ex) {
+        cout << ex.what();
+    } catch (DeadSuspect& ex) {
         cout << ex.what();
     }
 }

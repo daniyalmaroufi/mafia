@@ -12,6 +12,6 @@ void Villager::die_in_day() {
     std::cout << name << " died" << std::endl;
 }
 
-bool Villager::do_nighttask_on(Player* second_player) {
-    return false;
-}
+bool Villager::do_nighttask_on(Player* second_player) { return false; }
+
+bool Villager::is_mafia() { return false; }

@@ -16,6 +16,7 @@ class Detective : public Villager {
     bool do_nighttask_on(Player* second_player);
 
    private:
+   bool done_nighttask;
 };
 
 #endif

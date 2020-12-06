@@ -2,10 +2,11 @@
 #define __VILLAGER__
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include "../main/defines.hpp"
+#include <vector>
+
 #include "../Player/Player.hpp"
+#include "../main/defines.hpp"
 
 class Villager : public Player {
    public:
@@ -14,6 +15,7 @@ class Villager : public Player {
     void show_info();
     void die_in_day();
     bool do_nighttask_on(Player* second_player);
+    bool is_mafia();
 
    private:
 };

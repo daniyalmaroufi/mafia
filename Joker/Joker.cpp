@@ -13,3 +13,7 @@ void Joker::die_in_day() {
 }
 
 bool Joker::need_to_wake_up() { return false; }
+
+bool Joker::do_nighttask_on(Player* second_player) { return false; }
+
+bool Joker::is_mafia() { return false; }

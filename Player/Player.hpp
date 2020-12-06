@@ -5,6 +5,7 @@
 #include <string>
 
 #include "../main/defines.hpp"
+#include "../GameManager/Exceptions.hpp"
 
 class Player {
    public:
@@ -16,6 +17,7 @@ class Player {
     Player_status get_status();
     virtual bool need_to_wake_up();
     virtual bool do_nighttask_on(Player* second_player) = 0;
+    virtual bool is_mafia() = 0;
 
    protected:
     std::string name;

@@ -12,6 +12,7 @@ class GodFather : public Mafia {
     GodFather(std::string name_);
     GodFather(){};
     void show_info();
+    bool is_mafia();
 
    private:
 };

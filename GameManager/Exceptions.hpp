@@ -50,4 +50,18 @@ public:
     }
 };
 
+class DetectiveAsked : public std::exception {
+public:
+    const char* what() {
+        return "Detective has already asked\n";
+    }
+};
+
+class DeadSuspect : public std::exception {
+public:
+    const char* what() {
+        return "Suspect is dead\n";
+    }
+};
+
 #endif

@@ -15,6 +15,8 @@ class Joker : public Player {
     void show_info();
     void die_in_day();
     bool need_to_wake_up();
+    bool do_nighttask_on(Player* second_player);
+    bool is_mafia();
 
    private:
 };

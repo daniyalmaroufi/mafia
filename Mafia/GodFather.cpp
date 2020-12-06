@@ -6,3 +6,5 @@ void GodFather::show_info() {
     std::cout << name << ": "
               << "godfather" << std::endl;
 }
+
+bool GodFather::is_mafia() { return false; }
