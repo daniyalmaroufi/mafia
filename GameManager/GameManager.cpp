@@ -375,6 +375,14 @@ void GameManager::do_swap(Player* first_player, Player* second_player) {
     bool second_silent = second_player->is_silent();
     second_player->change_character_to(first_name, first_silent);
     first_player->change_character_to(second_name, second_silent);
+    int first_player_place;
+    int second_player_place;
+    for (int i = 0; i < players.size(); i++) {
+        if (players[i] == first_player) first_player_place = i;
+        if (players[i] == second_player) second_player_place = i;
+    }
+    players[first_player_place] = second_player;
+    players[second_player_place] = first_player;
 }
 
 void GameManager::game_state() {
